@@ -1,0 +1,197 @@
+# Trading System Configuration
+
+# System Settings
+system:
+  name: "Multi-Agent Trading System"
+  version: "1.0.0"
+  environment: "development"  # development, staging, production
+  timezone: "UTC"
+  base_currency: "USD"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name} | {message}"
+  file_path: "logs/trading_system.log"
+  max_file_size: "100MB"
+  backup_count: 5
+  audit_log_path: "logs/audit.log"
+
+# Database Configuration
+database:
+  url: "postgresql://user:password@localhost:5432/trading_db"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+
+# Redis Configuration
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+
+# Market Data APIs
+market_data:
+  primary_provider: "alpha_vantage"
+  
+  alpha_vantage:
+    api_key: "${ALPHA_VANTAGE_API_KEY}"
+    base_url: "https://www.alphavantage.co/query"
+    rate_limit: 5  # calls per minute
+    
+  yahoo_finance:
+    enabled: true
+    rate_limit: 2000  # calls per hour
+    
+  quandl:
+    api_key: "${QUANDL_API_KEY}"
+    base_url: "https://www.quandl.com/api/v3"
+
+# Asset Universe Configuration
+universe:
+  equities:
+    exchanges: ["NYSE", "NASDAQ", "AMEX"]
+    market_cap_min: 1000000000  # $1B minimum
+    volume_min: 1000000  # daily volume minimum
+    sectors: ["Technology", "Healthcare", "Financials", "Consumer", "Energy", "Industrials"]
+    
+  etfs:
+    categories: ["sector", "broad_market", "international", "bonds", "commodities"]
+    
+  options:
+    expiry_range_days: [7, 365]  # 1 week to 1 year
+    delta_range: [0.05, 0.95]
+    
+  futures:
+    asset_classes: ["equity_index", "commodities", "currencies", "bonds"]
+    
+  crypto:
+    exchanges: ["binance", "coinbase", "kraken"]
+    min_market_cap: 100000000  # $100M
+
+# Feature Engineering
+features:
+  lookback_periods: [5, 10, 20, 50, 100, 200]
+  technical_indicators:
+    - "sma"
+    - "ema"
+    - "rsi"
+    - "macd" 
+    - "bollinger_bands"
+    - "atr"
+    - "obv"
+    - "adx"
+    - "stochastic"
+    - "williams_r"
+  
+  statistical_features:
+    - "returns"
+    - "volatility"
+    - "skewness"
+    - "kurtosis"
+    - "autocorrelation"
+    - "cointegration"
+
+# ML Models Configuration
+ml_models:
+  ensemble_models:
+    - "xgboost"
+    - "catboost"
+    - "random_forest"
+    - "lstm"
+    - "transformer"
+    
+  model_selection:
+    cv_folds: 5
+    test_size: 0.2
+    validation_size: 0.2
+    
+  hyperparameter_tuning:
+    method: "optuna"
+    n_trials: 100
+    timeout: 3600  # 1 hour
+
+# Strategy Configuration
+strategies:
+  momentum:
+    lookback_period: 20
+    threshold: 0.02
+    min_volume: 1000000
+    
+  stat_arb:
+    pairs_method: "cointegration"
+    z_score_entry: 2.0
+    z_score_exit: 0.5
+    lookback_period: 252
+    
+  event_driven:
+    news_sources: ["reuters", "bloomberg", "yahoo"]
+    sentiment_threshold: 0.6
+    
+  options:
+    strategies: ["iron_condor", "butterfly", "straddle", "strangle"]
+    max_dte: 45
+    min_prob_profit: 0.6
+    
+  cross_asset:
+    correlation_threshold: 0.7
+    regime_detection: true
+
+# Risk Management
+risk_management:
+  max_portfolio_risk: 0.02  # 2% daily VaR
+  max_single_position: 0.05  # 5% of portfolio
+  max_sector_exposure: 0.20  # 20% per sector
+  max_drawdown: 0.15  # 15% maximum drawdown
+  
+  risk_metrics:
+    confidence_levels: [0.95, 0.99]
+    lookback_period: 252
+    
+  stress_tests:
+    scenarios: ["2008_crisis", "covid_crash", "tech_bubble"]
+    custom_shocks: [-0.10, -0.20, -0.30]  # 10%, 20%, 30% market drops
+
+# Signal Processing
+signals:
+  min_confirming_sources: 3
+  regime_adjustment: true
+  portfolio_adjustment: true
+  
+  ranking_criteria:
+    weights:
+      sharpe_ratio: 0.25
+      sortino_ratio: 0.25
+      max_drawdown: 0.20
+      tail_risk: 0.15
+      portfolio_impact: 0.15
+
+# Output Configuration
+output:
+  max_recommendations: 20
+  min_sharpe_ratio: 1.0
+  min_sortino_ratio: 1.2
+  max_drawdown_threshold: 0.10
+  
+  report_format: "json"
+  include_charts: true
+  include_backtest: true
+
+# Monitoring and Alerts
+monitoring:
+  performance_tracking: true
+  alert_thresholds:
+    daily_loss: 0.05
+    drawdown: 0.10
+    correlation_break: 0.3
+  
+  email_alerts: false
+  slack_webhook: "${SLACK_WEBHOOK_URL}"
+
+# Development Settings
+development:
+  debug_mode: true
+  cache_data: true
+  mock_api_calls: false
+  backtest_only: true
