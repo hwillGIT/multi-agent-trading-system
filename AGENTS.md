@@ -19,5 +19,15 @@ The repository is organized into the following key directories:
 -   `tests/`: Contains the test suite for the project, with unit, integration, and other tests.
 </repository_structure>
 
+<dependencies_and_installation>
+To set up the project, follow these installation instructions:
+
+-   **Primary Method**: The project's dependencies are listed in `requirements.txt` and can be installed by running `pip install -r requirements.txt`.
+-   **Makefile Convenience**: For a streamlined setup, you can use the `Makefile` targets. `make install` installs the production dependencies, while `make install-dev` installs both production and development dependencies.
+-   **Docker Environment**: For a fully containerized setup, the repository includes a `docker-compose.yml` file. You can build and run the environment using the `make docker-up` command, which is ideal for ensuring consistency across different development machines.
+</dependencies_and_installation>
+
+
+
 
 
