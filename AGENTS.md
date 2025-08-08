@@ -27,6 +27,15 @@ To set up the project, follow these installation instructions:
 -   **Docker Environment**: For a fully containerized setup, the repository includes a `docker-compose.yml` file. You can build and run the environment using the `make docker-up` command, which is ideal for ensuring consistency across different development machines.
 </dependencies_and_installation>
 
+<testing_instructions>
+The project uses `pytest` as its testing framework. All tests are located in the `tests/` directory.
+
+-   **Running Tests**: You can run the entire test suite by executing `pytest` in the root of the repository. Alternatively, you can use the `Makefile` commands: `make test` to run all tests, and `make test-cov` to run tests with a coverage report.
+-   **Testing Philosophy**: Following the guidelines in `CODING_STANDARDS.md`, tests should be comprehensive, covering unit, integration, and edge cases to ensure the reliability and correctness of the codebase.
+</testing_instructions>
+
+
+
 
 
 
