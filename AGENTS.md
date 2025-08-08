@@ -34,6 +34,10 @@ The project uses `pytest` as its testing framework. All tests are located in the
 -   **Testing Philosophy**: Following the guidelines in `CODING_STANDARDS.md`, tests should be comprehensive, covering unit, integration, and edge cases to ensure the reliability and correctness of the codebase.
 </testing_instructions>
 
+<pull_request_formatting>
+</pull_request_formatting>
+
+
 
 
 
