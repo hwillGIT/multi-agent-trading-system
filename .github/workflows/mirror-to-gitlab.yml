@@ -2,8 +2,7 @@ name: Mirror to GitLab
 on:
   push:
     branches: ["**"]
-    tags: ["**"]
-  workflow_dispatch:
+  delete: {}
 jobs:
   mirror:
     runs-on: ubuntu-latest
@@ -11,14 +10,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Push to GitLab
+      - name: Push mirror to GitLab
         env:
           GL_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          set -e
-          REPO_NAME="${GITHUB_REPOSITORY##*/}"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name  "github-actions[bot]"
-          git remote add gitlab "https://oauth2:${GL_TOKEN}@gitlab.com/hubert.williams/${REPO_NAME}.git"
-          git push gitlab --all  --force
-          git push gitlab --tags --force
+          git push --prune "https://oauth2:${GL_TOKEN}@gitlab.com/hwillGIT/multi-agent-trading-system.git" "+refs/remotes/origin/*:refs/heads/*" "+refs/tags/*:refs/tags/*"
