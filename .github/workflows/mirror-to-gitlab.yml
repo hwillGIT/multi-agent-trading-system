@@ -19,6 +19,6 @@ jobs:
           REPO_NAME="${GITHUB_REPOSITORY##*/}"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
-          git remote add gitlab "https://hubert.williams:${GL_TOKEN}@gitlab.com/hubert.williams/${REPO_NAME}.git"
+          git remote add gitlab "https://oauth2:${GL_TOKEN}@gitlab.com/hubert.williams/${REPO_NAME}.git"
           git push gitlab --all  --force
           git push gitlab --tags --force
